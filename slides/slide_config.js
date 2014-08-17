@@ -1,7 +1,7 @@
 var SLIDE_CONFIG = {
   // Slide settings
   settings: {
-    title: 'Java 8 vs. Scala',
+    title: 'Java 8',
     subtitle: 'Presentation with Hands-on',
     //eventInfo: {
     //  title: 'Google I/O',

@@ -68,24 +68,21 @@ URL: https://code.google.com/p/io-2012-slides
 
 <slide>
 	<hgroup>
-		<h2>Motivation</h2>
+		<h2>λ - Lambda</h2>
 	</hgroup>
 	<article>
 		<ul>
-			<li>Concurrency</li>
-			<li>Less error prone</li>
-			<li>Higher abstraction level</li>
-			<li>Concise code</li>
+			<li>Lambda calculus - the theoretical foundation of functional languages</li>
+			<li>Supported by many non-functional languages</li>
+			<li>Benefits
+				<ul>
+					<li>Concurrency</li>
+					<li>Less error prone</li>
+					<li>Higher abstraction level</li>
+					<li>Concise code</li>
+				</ul>
+			</li>
 		</ul>
-	</article>
-</slide>
-
-<slide>
-	<hgroup>
-		<h2>Lambda</h2>
-	</hgroup>
-	<article>
-		<img src="images/lambda-symbol.png">
 	</article>
 </slide>
 
@@ -94,12 +91,19 @@ URL: https://code.google.com/p/io-2012-slides
 		<h2>Lambda Examples</h2>
 	</hgroup>
 	<article>
-		<ul>
-			<li>list.filter(x -> x == 1) // [1,2,1,2,3] ==> [1,1]</li>
-			<li>list.map(x -> x + 1) // [1,2,3] ==> [2,3,4]</li>
-			<li>list.sorted() // [1,3,2,4] ==> [1,2,3,4]</li>
-			<li>list.foreach(print())</li>
-		</ul>
+		<pre class="prettyprint" data-lang="Java 8">
+x -> x + 1
+
+x -> x.toString
+
+x -> Integer.valueOf(x)
+
+x -> x == 1
+
+(x, y) -> x.compareTo(y)
+			
+(x, y) -> x.equals(y)
+		</pre>
 	</article>
 </slide>
 
