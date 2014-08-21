@@ -9,7 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static no.bekk.java.model.Data.*;
+import static no.bekk.java.model.Data.arsenal;
+import static no.bekk.java.model.Data.atleticoMadrid;
+import static no.bekk.java.model.Data.borussiaDortmund;
+import static no.bekk.java.model.Data.danielAlves;
+import static no.bekk.java.model.Data.diegoCosta;
+import static no.bekk.java.model.Data.juanMatta;
+import static no.bekk.java.model.Data.liverpool;
+import static no.bekk.java.model.Data.manchesterUnited;
+import static no.bekk.java.model.Data.wayneRooney;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.not;
@@ -19,8 +27,7 @@ public class Ex2_LambdaOnListsTest {
 
 	@Test
 	public void testRemoveCheapTeams() {
-		ArrayList<Team> teams =
-				asArrayList(manchesterUnited, liverpool, arsenal, borussiaDortmund, atleticoMadrid);
+		List<Team> teams = new ArrayList<>(asList(manchesterUnited, liverpool, arsenal, borussiaDortmund, atleticoMadrid));
 
 		Ex2_LambdaOnLists.removeCheapTeams(teams, 1_330_000_000.0);
 
@@ -51,14 +58,6 @@ public class Ex2_LambdaOnListsTest {
 		assertThat(players.get(2), is(juanMattaClone));
 		assertThat(players.get(3), is(wayneRooney));
 		assertThat(players.get(4), is(danielAlves));
-	}
-
-	private <T> ArrayList<T> asArrayList(T... elements) {
-		ArrayList<T> list = new ArrayList<>(elements.length);
-		for(T element: elements) {
-			list.add(element);
-		}
-		return list;
 	}
 
 	private BigDecimal round(Double d) {
