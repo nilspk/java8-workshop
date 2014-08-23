@@ -1,6 +1,6 @@
 ##Java 8 vs. Scala Workshop
 
-This workshop contains exercises to get familiar with new features in Java 8, including default methods in interfaces, functional interfaces, lambdas, and streams. 
+This workshop contains exercises to get familiar with new features in Java 8, including default methods in interfaces, functional interfaces, lambdas, streams and optional. 
 
 Slides for the workshop are located in the _slides_ folder of the project.
 
