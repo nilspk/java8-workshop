@@ -17,8 +17,8 @@ URL: https://code.google.com/p/io-2012-slides
 	<!--This one seems to work all the time, but really small on ipad-->
 	<!--<meta name="viewport" content="initial-scale=0.4">-->
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<link rel="stylesheet" media="all" href="theme/css/default.css">
 	<link rel="stylesheet" media="all" href="theme/css/custom.css">
+	<link rel="stylesheet" media="all" href="theme/css/default.css">
 	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
 	<base target="_blank">
 	<!-- This amazingness opens all links in a new tab. -->
@@ -237,61 +237,164 @@ myCollection.parallelStream().filter(...).map(...).max();
 
 <slide>
 	<hgroup>
-		<h2>Streams Operations</h2>
+		<h2>Streams - Intermediate Operations</h2>
 	</hgroup>
 	<article class="smaller">
 		<table>
 			<tr>
-				<th>Intermediate Operations</th>
-				<th>Terminal Operations</th>
+				<th>Method</th>
+				<th>Example</th>
 			</tr>
 			<tr>
-				<td>filter</td>
-				<td>forEach</td>
+				<td>---</td>
+				<td class="code">Stream&lt;String&gt; strings = Stream.of("1", "22", "333", "4444", "55555");<br/>
+					Stream&lt;Stream&lt;String&gt;&gt; streams = Stream.of(strings);</td>
 			</tr>
 			<tr>
-				<td>map</td>
-				<td>toArray</td>
+				<td>filter(Predicate<? super T> predicate)</td>
+				<td class="code">strings.filter(x -> x.length() < 3);</td>
 			</tr>
 			<tr>
-				<td>flatMap</td>
-				<td>reduce</td>
+				<td>map(mapper)</td>
+				<td class="code">strings.map(x -> x.substring(3));</td>
 			</tr>
 			<tr>
-				<td>peak</td>
-				<td>collect</td>
+				<td>mapToInt(mapper)</td>
+				<td class="code">strings.mapToInt(Integer::valueOf);</td>
 			</tr>
 			<tr>
-				<td>distinct</td>
-				<td>min</td>
+				<td>mapToLong(mapper)</td>
+				<td class="code">strings.mapToLong(Long::valueOf);</td>
 			</tr>
 			<tr>
-				<td>sorted</td>
-				<td>max</td>
+				<td>mapToDouble(mapper)</td>
+				<td class="code">strings.mapToDouble(Double::valueOf);</td>
 			</tr>
 			<tr>
-				<td>limit</td>
-				<td>count</td>
+				<td>flatMap(mapper)</td>
+				<td class="code">streams.flatMap(s -> s.map(x -> x.substring(3)));</td>
 			</tr>
 			<tr>
-				<td>skip</td>
-				<td>anyMatch</td>
+				<td>flatMapToInt(mapper)</td>
+				<td class="code">streams.flatMapToInt(s -> s.mapToInt(Integer::valueOf));</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td>allMatch</td>
+				<td>flatMapToLong(mapper)</td>
+				<td class="code">streams.flatMapToLong(s -> s.mapToLong(Long::valueOf));</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td>noneMatch</td>
+				<td>flatMapToDouble(mapper)</td>
+				<td class="code">streams.flatMapToDouble(s -> s.mapToDouble(Double::valueOf));</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td>findFirst</td>
+				<td>distinct()</td>
+				<td class="code">strings.distinct();</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td>findAny</td>
+				<td>sorted()</td>
+				<td class="code">strings.sorted();</td>
+			</tr>
+			<tr>
+				<td>sorted(comparator)</td>
+				<td class="code">strings.sorted(Comparator.comparing(x -> x));</td>
+			</tr>
+			<tr>
+				<td>peek(action)</td>
+				<td class="code">strings.peek(System.out::println);</td>
+			</tr>
+			<tr>
+				<td>limit(maxSize)</td>
+				<td class="code">strings.limit(2);</td>
+			</tr>
+			<tr>
+				<td>skip(n)</td>
+				<td class="code">strings.skip(1);</td>
+			</tr>
+		</table>
+	</article>
+</slide>
+
+<slide>
+	<hgroup>
+		<h2>Streams - Terminal Operations</h2>
+	</hgroup>
+	<article class="smaller">
+		<table>
+			<tr>
+				<th>Method</th>
+				<th>Example</th>
+			</tr>
+			<tr>
+				<td>---</td>
+				<td class="code">Stream&lt;String&gt; strings = Stream.of("1", "22", "333", "4444", "55555");<br/>
+			</tr>
+			<tr>
+				<td>forEach(action)</td>
+				<td class="code">strings.forEach(System.out::println);</td>
+			</tr>
+			<tr>
+				<td>forEachOrdered(action)</td>
+				<td class="code">strings.forEachOrdered(System.out::println);</td>
+			</tr>
+			<tr>
+				<td>toArray()</td>
+				<td class="code">strings.toArray();</td>
+			</tr>
+			<tr>
+				<td>toArray(generator)</td>
+				<td class="code">strings.toArray(i -> new String[i]);</td>
+			</tr>
+			<tr>
+				<td>reduce(identity, accumulator)</td>
+				<td class="code">strings.reduce("", String::concat);</td>
+			</tr>
+			<tr>
+				<td>reduce(accumulator)</td>
+				<td class="code">strings.reduce(String::concat);</td>
+			</tr>
+			<tr>
+				<td>reduce(identity, accumulator, combiner)</td>
+				<td class="code">strings.reduce(0, (x, y) -> x + y.length(), Integer::sum);</td>
+			</tr>
+			<tr>
+				<td>collect(collector)</td>
+				<td class="code">strings.collect(Collectors.toList());</td>
+			</tr>
+			<tr>
+				<td>collect(supplier, accumulator, combiner)</td>
+				<td class="code">strings.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);</td>
+			</tr>
+			<tr>
+				<td>min(comparator)</td>
+				<td class="code">strings.min(Comparator.comparing(x -> x));</td>
+			</tr>
+			<tr>
+				<td>max(comparator)</td>
+				<td class="code">strings.max(Comparator.comparing(x -> x));</td>
+			</tr>
+			<tr>
+				<td>count()</td>
+				<td class="code">strings.count();</td>
+			</tr>
+			<tr>
+				<td>anyMatch(predicate)</td>
+				<td class="code">strings.anyMatch(x -> x.length() > 3);</td>
+			</tr>
+			<tr>
+				<td>allMatch(predicate)</td>
+				<td class="code">strings.allMatch(x -> x.length() > 3);</td>
+			</tr>
+			<tr>
+				<td>noneMatch(predicate)</td>
+				<td class="code">strings.noneMatch(x -> x.length() > 3);</td>
+			</tr>
+			<tr>
+				<td>findFirst()</td>
+				<td class="code">strings.findFirst();</td>
+			</tr>
+			<tr>
+				<td>findAny()</td>
+				<td class="code">strings.findAny();</td>
 			</tr>
 		</table>
 	</article>
@@ -340,6 +443,9 @@ public static List&lt;String&gt; brandsSortedByPrice(List&lt;Car&gt; cars) {
 			<li>Ex3_LambdaWithStreams</li>
 			<li>Ex4_LambdaWithParallelStreams</li>
 		</ul>
+		<p>
+			Hint: Check out new methods in java.util.Comparator and the new java.util.streams.Collectors
+		</p>
 	</article>
 </slide>
 
