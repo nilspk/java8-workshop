@@ -5,19 +5,12 @@ import no.bekk.java.model.Team;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static no.bekk.java.model.Data.arsenal;
-import static no.bekk.java.model.Data.atleticoMadrid;
-import static no.bekk.java.model.Data.borussiaDortmund;
-import static no.bekk.java.model.Data.danielAlves;
-import static no.bekk.java.model.Data.diegoCosta;
-import static no.bekk.java.model.Data.juanMatta;
-import static no.bekk.java.model.Data.liverpool;
-import static no.bekk.java.model.Data.manchesterUnited;
-import static no.bekk.java.model.Data.wayneRooney;
+import static no.bekk.java.model.Data.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.not;
@@ -58,6 +51,14 @@ public class Ex2_LambdaOnListsTest {
 		assertThat(players.get(2), is(juanMattaClone));
 		assertThat(players.get(3), is(wayneRooney));
 		assertThat(players.get(4), is(danielAlves));
+	}
+
+	@Test
+	public void testRemoveOldPlayers() {
+		List<Player> result = Ex2_LambdaOnLists.removeOldPlayers(LocalDate.of(1984, 1, 1), bayernMunchen.players);
+		result.forEach(System.out::println);
+		assertThat(result, hasItems(arjenRobben));
+		assertThat(result, not(hasItems(philippLahm, franckRibery)));
 	}
 
 	private BigDecimal round(Double d) {
