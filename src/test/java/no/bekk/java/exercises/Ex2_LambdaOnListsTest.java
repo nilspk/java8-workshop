@@ -1,5 +1,6 @@
 package no.bekk.java.exercises;
 
+import no.bekk.java.model.League;
 import no.bekk.java.model.Player;
 import no.bekk.java.model.Team;
 import org.junit.Test;
@@ -19,16 +20,6 @@ import static org.junit.Assert.assertThat;
 public class Ex2_LambdaOnListsTest {
 
 	@Test
-	public void testRemoveCheapTeams() {
-		List<Team> teams = new ArrayList<>(asList(manchesterUnited, liverpool, arsenal, borussiaDortmund, atleticoMadrid));
-
-		Ex2_LambdaOnLists.removeCheapTeams(teams, 1_330_000_000.0);
-
-		assertThat(teams, hasItems(manchesterUnited, arsenal));
-		assertThat(teams, not(hasItems(liverpool, borussiaDortmund, atleticoMadrid)));
-	}
-
-	@Test
 	public void testAddValueToEachTeam() {
 		List<Team> teams = asList(manchesterUnited, liverpool, arsenal);
 
@@ -40,25 +31,30 @@ public class Ex2_LambdaOnListsTest {
 	}
 
 	@Test
-	public void testSortByAgeAndThenName() {
-		Player juanMattaClone = new Player(juanMatta.name+"clone", juanMatta.birthDate);
-		List<Player> players = asList(wayneRooney, juanMattaClone, danielAlves, juanMatta, diegoCosta);
-
-		Ex2_LambdaOnLists.sortByAgeAndThenName(players);
-
-		assertThat(players.get(0), is(diegoCosta));
-		assertThat(players.get(1), is(juanMatta));
-		assertThat(players.get(2), is(juanMattaClone));
-		assertThat(players.get(3), is(wayneRooney));
-		assertThat(players.get(4), is(danielAlves));
-	}
-
-	@Test
 	public void testRemoveOldPlayers() {
 		List<Player> result = Ex2_LambdaOnLists.removeOldPlayers(LocalDate.of(1984, 1, 1), bayernMunchen.players);
 		result.forEach(System.out::println);
 		assertThat(result, hasItems(arjenRobben));
 		assertThat(result, not(hasItems(philippLahm, franckRibery)));
+	}
+
+	@Test
+	public void testSetLeagueNamesToUpperCase() {
+		List<League> result = Ex2_LambdaOnLists.setLeagueNamesToUpperCase(leagues);
+
+		assertThat(result.get(0).name, is("PREMIER LEAGUE"));
+		assertThat(result.get(1).name, is("LA LIGA"));
+		assertThat(result.get(2).name, is("BUNDESLIGA"));
+	}
+
+	@Test
+	public void testRemoveTeamsWithLowValue() {
+		List<Team> teams = new ArrayList<>(asList(manchesterUnited, liverpool, arsenal, borussiaDortmund, atleticoMadrid));
+
+		Ex2_LambdaOnLists.removeTeamsWithLowValue(teams, 1_330_000_000.0);
+
+		assertThat(teams, hasItems(manchesterUnited, arsenal));
+		assertThat(teams, not(hasItems(liverpool, borussiaDortmund, atleticoMadrid)));
 	}
 
 	private BigDecimal round(Double d) {

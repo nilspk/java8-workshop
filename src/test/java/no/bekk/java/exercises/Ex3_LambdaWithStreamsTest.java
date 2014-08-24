@@ -116,4 +116,28 @@ public class Ex3_LambdaWithStreamsTest {
 		assertThat(playersOlderThanMinAge, hasItems(stevenGerrard, danielAlves, davidVilla, franckRibery, timoHildebrand));
 		assertThat(playersOlderThanMinAge.size(), is(5));
 	}
+
+	@Test
+	public void testSortByAgeAndThenName() {
+		Player juanMattaClone = new Player(juanMatta.name+"clone", juanMatta.birthDate);
+		List<Player> players = asList(wayneRooney, juanMattaClone, danielAlves, juanMatta, diegoCosta);
+
+		List<Player> result = Ex3_LambdaWithStreams.sortByAgeAndThenName(players);
+
+		assertThat(result.get(0), is(diegoCosta));
+		assertThat(result.get(1), is(juanMatta));
+		assertThat(result.get(2), is(juanMattaClone));
+		assertThat(result.get(3), is(wayneRooney));
+		assertThat(result.get(4), is(danielAlves));
+	}
+
+	@Test
+	public void testYoungestPlayerOnEachTeamMappedByTeamName() {
+
+		Map<String, Player> result = Ex3_LambdaWithStreams.youngestPlayerOnEachTeamMappedByTeamName(asList(manchesterUnited, liverpool, arsenal));
+
+		assertThat(result.get(manchesterUnited.name), is(juanMatta));
+		assertThat(result.get(liverpool.name), is(danielSturridge));
+		assertThat(result.get(arsenal.name), is(jackWilshere));
+	}
 }

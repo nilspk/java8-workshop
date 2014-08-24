@@ -1,5 +1,6 @@
 package no.bekk.java.exercises;
 
+import no.bekk.java.model.League;
 import no.bekk.java.model.Player;
 import no.bekk.java.model.Team;
 
@@ -27,5 +28,8 @@ public class Ex1_Lambda {
         else return y;
     };
 
-	//TODO: More exercises?
+	static BinaryOperator<League> longestLeagueName = (x, y) -> {
+		if (x.getName().length() > y.getName().length()) return x;
+		else return y;
+	};
 }

@@ -1,5 +1,6 @@
 package no.bekk.java.exercises;
 
+import no.bekk.java.model.League;
 import no.bekk.java.model.Player;
 import no.bekk.java.model.Team;
 
@@ -10,15 +11,6 @@ import java.util.List;
 import static java.util.Comparator.comparing;
 
 public class Ex2_LambdaOnLists {
-
-	static void removeCheapTeams(List<Team> teams, Double minValue) {
-		teams.removeIf(team -> team.value < minValue);
-	}
-
-	// TODO: Move to Ex3? (and use stream()) (new methods in Comparator not introduced for these exercises.)
-	static void sortByAgeAndThenName(final List<Player> players) {
-		players.sort(comparing(Player::getBirthDate).reversed().thenComparing(Player::getName));
-	}
 
 	static List<Player> removeOldPlayers(LocalDate maxAge, List<Player> players) {
 		List<Player> result = new ArrayList<>(players.size());
@@ -34,5 +26,13 @@ public class Ex2_LambdaOnLists {
 		return result;
 	}
 
-	// TODO: add some exercises?
+	static List<League> setLeagueNamesToUpperCase(List<League> leagues) {
+		List<League> result = new ArrayList<>(leagues.size());
+		leagues.forEach(league -> result.add(new League(league.name.toUpperCase(), league.teams)));
+		return result;
+	}
+
+	static void removeTeamsWithLowValue(List<Team> teams, Double minValue) {
+		teams.removeIf(team -> team.value < minValue);
+	}
 }

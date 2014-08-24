@@ -1,5 +1,6 @@
 package no.bekk.java.exercises;
 
+import no.bekk.java.model.League;
 import no.bekk.java.model.Player;
 import no.bekk.java.model.Team;
 import org.junit.Test;
@@ -8,12 +9,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
-import static no.bekk.java.model.Data.arjenRobben;
-import static no.bekk.java.model.Data.bayernMunchen;
-import static no.bekk.java.model.Data.franckRibery;
-import static no.bekk.java.model.Data.liverpool;
-import static no.bekk.java.model.Data.manchesterUnited;
-import static no.bekk.java.model.Data.stevenGerrard;
+import static no.bekk.java.model.Data.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -50,4 +46,11 @@ public class Ex1_LambdaTest {
 
         assertThat(teamWithHighestValue, is(manchesterUnited));
     }
+
+	@Test
+	public void testLongestLeagueName () {
+		League leagueWithLongestName = Ex1_Lambda.longestLeagueName.apply(laLiga, premierLeague);
+
+		assertThat(leagueWithLongestName, is(premierLeague));
+	}
 }
