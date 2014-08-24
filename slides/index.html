@@ -239,9 +239,9 @@ public interface Iterable&lt;E&gt; {
 	</hgroup>
 	<article>
 <pre class="prettyprint" data-lang="Java 8">
-myCollection.stream().filter(...).map(...).max();
+myCollection.stream().filter(...).map(...).forEach(...);
 
-myCollection.parallelStream().filter(...).map(...).max();
+myCollection.parallelStream().filter(...).map(...).forEach(...);
 </pre>
 	</article>
 </slide>
@@ -438,9 +438,9 @@ public static List&lt;String&gt; brandsSortedByPrice(List&lt;Car&gt; cars) {
 <pre class="prettyprint" data-lang="Java 8">
 public static List&lt;String&gt; brandsSortedByPrice(List&lt;Car&gt; cars) {
   return cars.stream()
-               .sorted(comparing(Car::getPrice))
+               .sorted(Comparator.comparing(Car::getPrice))
                .map(Car::getBrand)
-               .collect(toList());
+               .collect(Collectors.toList());
 }
 </pre>
 	</article>

@@ -3,9 +3,7 @@ package no.bekk.java.examples;
 import no.bekk.java.model.Car;
 
 import java.util.*;
-
-import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.toList;
+import java.util.stream.Collectors;
 
 public class CarExamples {
 
@@ -31,9 +29,9 @@ public class CarExamples {
     static class Java8 {
         public static List<String> brandsSortedByPrice(List<Car> cars) {
             return cars.stream()
-                    .sorted(comparing(Car::getPrice))
+                    .sorted(Comparator.comparing(Car::getPrice))
                     .map(Car::getBrand)
-                    .collect(toList());
+                    .collect(Collectors.toList());
         }
     }
 
