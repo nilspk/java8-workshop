@@ -8,9 +8,6 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
-import static no.bekk.java.exercises.Ex1_Lambda.getPlayerAge;
-import static no.bekk.java.exercises.Ex1_Lambda.getPlayerName;
-import static no.bekk.java.exercises.Ex1_Lambda.isOlderThan;
 import static no.bekk.java.model.Data.arjenRobben;
 import static no.bekk.java.model.Data.bayernMunchen;
 import static no.bekk.java.model.Data.franckRibery;
@@ -24,19 +21,19 @@ public class Ex1_LambdaTest {
 
     @Test
     public void getNameFromPlayers() {
-        List<String> names = manchesterUnited.getPlayers().stream().map(getPlayerName()).collect(toList());
+        List<String> names = manchesterUnited.getPlayers().stream().map(Ex1_Lambda.playerName).collect(toList());
         assertThat(names, is(asList("Wayne Rooney", "Juan Matta", "Robin van Persie")));
     }
 
     @Test
     public void getAgeFromPlayers() {
-        List<Integer> ages = bayernMunchen.getPlayers().stream().map(getPlayerAge()).collect(toList());
+        List<Integer> ages = bayernMunchen.getPlayers().stream().map(Ex1_Lambda.playerAge).collect(toList());
         assertThat(ages, is(asList(31, 30, 30)));
     }
 
     @Test
     public void onlyKeepsPlayersOver30() {
-        List<Player> oldPlayers = liverpool.getPlayers().stream().filter(isOlderThan(30)).collect(toList());
+        List<Player> oldPlayers = liverpool.getPlayers().stream().filter(Ex1_Lambda.isOlderThan(30)).collect(toList());
         assertThat(oldPlayers, is(asList(stevenGerrard)));
     }
 
