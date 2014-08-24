@@ -76,10 +76,10 @@ URL: https://code.google.com/p/io-2012-slides
 			<li>Supported by many non-functional languages</li>
 			<li>Benefits
 				<ul>
-					<li>Concurrency</li>
+					<li>Concise code</li>
 					<li>Less error prone</li>
 					<li>Higher abstraction level</li>
-					<li>Concise code</li>
+					<li>Concurrency</li>
 				</ul>
 			</li>
 		</ul>
@@ -107,13 +107,68 @@ x -> x == 1
 	</article>
 </slide>
 
+<!--<slide>-->
+	<!--<hgroup>-->
+		<!--<h2>Exercises</h2>-->
+	<!--</hgroup>-->
+	<!--<article>-->
+		<!--<ul>-->
+			<!--<li>Ex1_Lambda_Basics</li>-->
+		<!--</ul>-->
+	<!--</article>-->
+<!--</slide>-->
+
+<slide>
+	<hgroup>
+		<h2>Functional Interfaces</h2>
+	</hgroup>
+	<article>
+		<ul>
+			<li>Single-method interface</li>
+			<li>Many predefined functional interfaces in the <code>java.util.function</code> package</li>
+		</ul>
+            <pre class="prettyprint" data-lang="Java 8">
+@FunctionalInterface
+public interface MyFunctionalInterface&lt;I, O&gt; {
+    public O apply(I i);
+}
+            </pre>
+	</article>
+</slide>
+
+<slide>
+	<hgroup>
+		<h2>Lambdas and Functional Interfaces</h2>
+	</hgroup>
+	<article>
+            <pre class="prettyprint" data-lang="Java 8">
+@FunctionalInterface public interface MyFunctionalInterface&lt;I, O&gt; {
+    public O apply(I i);
+}
+            </pre>
+            <pre class="prettyprint" data-lang="Java 8">
+MyFunctionalInterface&lt;String, Integer&gt; fn1 =
+    new MyFunctionalInterface&lt;String, Integer&gt;() {
+        @Override public Integer apply(String s) {
+            return Integer.valueOf(s);
+        }
+    };
+MyFunctionalInterface&lt;String, Integer&gt; fn2 = (String a) -> {return Integer.valueOf(a);};
+MyFunctionalInterface&lt;String, Integer&gt; fn3 = (String a) -> Integer.valueOf(a);
+MyFunctionalInterface&lt;String, Integer&gt; fn4 = (a) -> Integer.valueOf(a);
+MyFunctionalInterface&lt;String, Integer&gt; fn5 = a -> Integer.valueOf(a);
+MyFunctionalInterface&lt;String, Integer&gt; fn6 = Integer::valueOf;
+            </pre>
+	</article>
+</slide>
+
 <slide>
 	<hgroup>
 		<h2>Exercises</h2>
 	</hgroup>
 	<article>
 		<ul>
-			<li>Ex1_Lambda_Basics</li>
+			<li>Ex1_Lambda</li>
 		</ul>
 	</article>
 </slide>
@@ -145,60 +200,17 @@ interface Rectangle {
 			<li>Multiple inheritence of behaviour</li>
 		</ul>
             <pre class="prettyprint" data-lang="Java 8">
-public interface Collection&lt;E&gt; extends Iterable&lt;E&gt; {
+public interface Iterable&lt;E&gt; {
 
-  ...
+    ...
 
-   <b>default</b> Stream&lt;E&gt; stream() {
-       return StreamSupport.stream(spliterator(), false);
-   }
-}
-            </pre>
-	</article>
-</slide>
-
-<slide>
-	<hgroup>
-		<h2>Functional Interfaces</h2>
-	</hgroup>
-	<article>
-		<ul>
-			<li>Single-method interface</li>
-			<li>Many predefined functional interfaces in the <code>java.util.function</code> package</li>
-		</ul>
-            <pre class="prettyprint" data-lang="Java 8">
-@FunctionalInterface
-public interface MyFunctionalInterface&lt;I, O&gt; {
-    public O apply(I i);
-}
-            </pre>
-	</article>
-</slide>
-
-<slide>
-	<hgroup>
-		<h2>Lambdas</h2>
-	</hgroup>
-	<article>
-            <pre class="prettyprint" data-lang="Java 8">
-@FunctionalInterface
-public interface MyFunctionalInterface&lt;I, O&gt; {
-    public O apply(I i);
-}
-            </pre>
-            <pre class="prettyprint" data-lang="Java 8">
-MyFunctionalInterface&lt;String, Integer&gt; fn1 =
-    new MyFunctionalInterface&lt;String, Integer&gt;() {
-        @Override
-        public Integer apply(String s) {
-            return Integer.valueOf(s);
+    <b>default</b> void forEach(Consumer<? super T> action) {
+        Objects.requireNonNull(action);
+        for (T t : this) {
+            action.accept(t);
         }
-    };
-MyFunctionalInterface&lt;String, Integer&gt; fn2 = (String a) -> {return Integer.valueOf(a);};
-MyFunctionalInterface&lt;String, Integer&gt; fn3 = (String a) -> Integer.valueOf(a);
-MyFunctionalInterface&lt;String, Integer&gt; fn4 = (a) -> Integer.valueOf(a);
-MyFunctionalInterface&lt;String, Integer&gt; fn5 = a -> Integer.valueOf(a);
-MyFunctionalInterface&lt;String, Integer&gt; fn6 = Integer::valueOf;
+    }
+}
             </pre>
 	</article>
 </slide>
@@ -209,7 +221,6 @@ MyFunctionalInterface&lt;String, Integer&gt; fn6 = Integer::valueOf;
 	</hgroup>
 	<article>
 		<ul>
-			<li>Ex1_Lambda</li>
 			<li>Ex2_LambdaOnLists</li>
 		</ul>
 	</article>
@@ -245,6 +256,7 @@ myCollection.parallelStream().filter(...).map(...).max();
 				<th>Method</th>
 				<th>Example</th>
 			</tr>
+			<!-- TODO: Vise resultat av eksempler? -->
 			<tr>
 				<td>---</td>
 				<td class="code">Stream&lt;String&gt; strings = Stream.of("1", "22", "333", "4444", "55555");<br/>
