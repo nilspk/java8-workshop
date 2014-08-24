@@ -35,6 +35,16 @@ public class Ex3_LambdaWithStreamsTest {
 	}
 
 	@Test
+	public void testPlayersWithNamesStartingWith() {
+		List<Player> players = asList(kevinPrinceBoateng, matsHummels, robertLewandowski, marcoReus);
+
+		List<Player> playersWithNameStartingWithM = Ex3_LambdaWithStreams.playersWithNamesStartingWith("M", players);
+
+		assertThat(playersWithNameStartingWithM, hasItems(matsHummels, marcoReus));
+		assertThat(playersWithNameStartingWithM.size(), is(2));
+	}
+
+	@Test
 	public void testAverageAgeOfPlayers() {
 		List<Player> players = asList(wayneRooney, juanMatta, mesutOzil, olivierGiroud);
 
@@ -50,16 +60,6 @@ public class Ex3_LambdaWithStreamsTest {
 		String nameOfPlayerClosestToAverage = Ex3_LambdaWithStreams.nameOfPlayerClosestToAverage(players);
 
 		assertThat(nameOfPlayerClosestToAverage, is("Wayne Rooney"));
-	}
-
-	@Test
-	public void testPlayersWithNamesStartingWith() {
-		List<Player> players = asList(kevinPrinceBoateng, matsHummels, robertLewandowski, marcoReus);
-
-		List<Player> playersWithNameStartingWithM = Ex3_LambdaWithStreams.playersWithNamesStartingWith("M", players);
-
-		assertThat(playersWithNameStartingWithM, hasItems(matsHummels, marcoReus));
-		assertThat(playersWithNameStartingWithM.size(), is(2));
 	}
 
 	@Test
@@ -79,6 +79,13 @@ public class Ex3_LambdaWithStreamsTest {
 	}
 
 	@Test
+	public void testTeamWithHighestValue() {
+		Team teamWithHighersValueInPremierLeague = Ex3_LambdaWithStreams.teamWithHighestValue(premierLeague.teams);
+
+		assertThat(teamWithHighersValueInPremierLeague, is(manchesterUnited));
+	}
+
+	@Test
 	public void testGroupPlayersByBirthYear() {
 		List<Player> players = asList(wayneRooney, juanMatta, mesutOzil, olivierGiroud);
 
@@ -90,13 +97,6 @@ public class Ex3_LambdaWithStreamsTest {
 		assertThat(groupedPlayers.get(1985).size(), is(1));
 		assertThat(groupedPlayers.get(1986), hasItems(olivierGiroud));
 		assertThat(groupedPlayers.get(1986).size(), is(1));
-	}
-
-	@Test
-	public void testTeamWithHighestValue() {
-		Team teamWithHighersValueInPremierLeague = Ex3_LambdaWithStreams.teamWithHighestValue(premierLeague.teams);
-
-		assertThat(teamWithHighersValueInPremierLeague, is(manchesterUnited));
 	}
 
 	@Test

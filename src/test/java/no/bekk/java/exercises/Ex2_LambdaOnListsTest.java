@@ -20,6 +20,14 @@ import static org.junit.Assert.assertThat;
 public class Ex2_LambdaOnListsTest {
 
 	@Test
+	public void testRemoveOldPlayers() {
+		List<Player> result = Ex2_LambdaOnLists.removeOldPlayers(LocalDate.of(1984, 1, 1), bayernMunchen.players);
+		result.forEach(System.out::println);
+		assertThat(result, hasItems(arjenRobben));
+		assertThat(result, not(hasItems(philippLahm, franckRibery)));
+	}
+
+	@Test
 	public void testAddValueToEachTeam() {
 		List<Team> teams = asList(manchesterUnited, liverpool, arsenal);
 
@@ -28,14 +36,6 @@ public class Ex2_LambdaOnListsTest {
 		assertThat(round(teamsWithFivePercentValueIncrease.get(0).value), is(round(2_950_500_000.0)));
 		assertThat(round(teamsWithFivePercentValueIncrease.get(1).value), is(round(725_550_000.0)));
 		assertThat(round(teamsWithFivePercentValueIncrease.get(2).value), is(round(1_396_500_000.0)));
-	}
-
-	@Test
-	public void testRemoveOldPlayers() {
-		List<Player> result = Ex2_LambdaOnLists.removeOldPlayers(LocalDate.of(1984, 1, 1), bayernMunchen.players);
-		result.forEach(System.out::println);
-		assertThat(result, hasItems(arjenRobben));
-		assertThat(result, not(hasItems(philippLahm, franckRibery)));
 	}
 
 	@Test

@@ -22,6 +22,10 @@ public class Ex3_LambdaWithStreams {
 		return players.stream().mapToInt(Player::getAge).max().getAsInt();
 	}
 
+	static List<Player> playersWithNamesStartingWith(String start, List<Player> players) {
+		return players.stream().filter(player -> player.name.startsWith(start)).collect(toList());
+	}
+
 	static Double averageAgeOfPlayers(List<Player> players) {
 		return players.stream().mapToInt(Player::getAge).average().getAsDouble();
 	}
@@ -29,10 +33,6 @@ public class Ex3_LambdaWithStreams {
 	static String nameOfPlayerClosestToAverage(List<Player> players) {
 		Double average = averageAgeOfPlayers(players);
 		return players.stream().min(comparing(player -> Math.abs(player.getAge() - average))).get().getName();
-	}
-
-	static List<Player> playersWithNamesStartingWith(String start, List<Player> players) {
-		return players.stream().filter(player -> player.name.startsWith(start)).collect(toList());
 	}
 
 	static Double sumValueOfAllTeams(List<Team> teams) {
@@ -43,36 +43,40 @@ public class Ex3_LambdaWithStreams {
 		return players.stream().reduce(Ex1_Lambda.youngestPlayer).get();
 	}
 
-	static Map<Integer, List<Player>> groupPlayersByBirthYear(List<Player> players) {
-		return players.stream().collect(groupingBy(player -> player.getBirthDate().getYear(), toList()));
-	}
-
 	static Team teamWithHighestValue(final List<Team> teams) {
 		return teams.stream().reduce(Ex1_Lambda.highestTeamValue).get();
+	}
+
+	static Map<Integer, List<Player>> groupPlayersByBirthYear(List<Player> players) {
+		return players.stream().collect(groupingBy(player -> player.getBirthDate().getYear(), toList()));
 	}
 
 	static List<Double> sumValuesOfEachLeague(final List<League> leagues) {
 		return leagues.stream()
 				.map(league -> league.getTeams().stream()
-                        .collect(summingDouble(Team::getValue)))
+						.collect(summingDouble(Team::getValue)))
 				.collect(toList());
 	}
 
 	static List<Player> playersBornBefore(final LocalDate minAge, final List<League> leagues) {
 		return leagues.stream()
-                .flatMap(league -> league.getTeams().stream())
-                .flatMap(team -> team.getPlayers().stream())
-                .filter(player -> player.birthDate.isBefore(minAge))
-                .collect(toList());
+				.flatMap(league -> league.getTeams().stream())
+				.flatMap(team -> team.getPlayers().stream())
+				.filter(player -> player.birthDate.isBefore(minAge))
+				.collect(toList());
 	}
 
 	static List<Player> sortByAgeAndThenName(final List<Player> players) {
-		return players.stream().sorted(comparing(Player::getBirthDate).reversed().thenComparing(Player::getName)).collect(toList());
+		return players.stream().sorted(
+				comparing(Player::getBirthDate)
+						.reversed()
+						.thenComparing(Player::getName)).collect(toList());
 	}
 
 	static Map<String, Player> youngestPlayerOnEachTeamMappedByTeamName(final List<Team> teams) {
 		return teams.stream()
-				.map(team -> new Team(team.name, team.value, Arrays.asList(team.players.stream().reduce(Ex1_Lambda.youngestPlayer).get())))
+				.map(team -> new Team(team.name, team.value, Arrays.asList(team.players.stream()
+						.reduce(Ex1_Lambda.youngestPlayer).get())))
 				.collect(toMap(Team::getName, team -> team.getPlayers().get(0)));
 	}
 }

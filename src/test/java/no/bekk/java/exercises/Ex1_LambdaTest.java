@@ -16,32 +16,33 @@ import static org.junit.Assert.assertThat;
 public class Ex1_LambdaTest {
 
     @Test
-    public void getNameFromPlayers() {
+    public void testPlayerName() {
         List<String> names = manchesterUnited.getPlayers().stream().map(Ex1_Lambda.playerName).collect(toList());
         assertThat(names, is(asList("Wayne Rooney", "Juan Matta", "Robin van Persie")));
     }
 
     @Test
-    public void getAgeFromPlayers() {
+    public void testPlayerAge() {
         List<Integer> ages = bayernMunchen.getPlayers().stream().map(Ex1_Lambda.playerAge).collect(toList());
         assertThat(ages, is(asList(31, 30, 30)));
     }
 
     @Test
-    public void onlyKeepsPlayersOver30() {
-        List<Player> oldPlayers = liverpool.getPlayers().stream().filter(Ex1_Lambda.isOlderThan(30)).collect(toList());
+    public void testIsOlderThan() {
+		final int MIN_AGE = 30;
+        List<Player> oldPlayers = liverpool.getPlayers().stream().filter(Ex1_Lambda.isOlderThan(MIN_AGE)).collect(toList());
         assertThat(oldPlayers, is(asList(stevenGerrard)));
     }
 
     @Test
-    public void testYoungestPlayerLambda() {
+    public void testYoungestPlayer() {
         Player youngestPlayer = Ex1_Lambda.youngestPlayer.apply(franckRibery, arjenRobben);
 
         assertThat(youngestPlayer, is(arjenRobben));
     }
 
     @Test
-    public void testHighestTeamValueLambda() {
+    public void testHighestTeamValue() {
         Team teamWithHighestValue = Ex1_Lambda.highestTeamValue.apply(manchesterUnited, liverpool);
 
         assertThat(teamWithHighestValue, is(manchesterUnited));

@@ -8,8 +8,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Comparator.comparing;
-
 public class Ex2_LambdaOnLists {
 
 	static List<Player> removeOldPlayers(LocalDate maxAge, List<Player> players) {
