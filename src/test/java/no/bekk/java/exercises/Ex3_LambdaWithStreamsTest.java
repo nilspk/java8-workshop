@@ -53,14 +53,6 @@ public class Ex3_LambdaWithStreamsTest {
 		assertThat(averageAge, is(26.5));
 	}
 
-	@Test
-	public void testNameOfPlayerClosestToAverage() {
-		List<Player> players = asList(wayneRooney, juanMatta, olivierGiroud, davidVilla);
-
-		String nameOfPlayerClosestToAverage = Ex3_LambdaWithStreams.nameOfPlayerClosestToAverage(players);
-
-		assertThat(nameOfPlayerClosestToAverage, is("Wayne Rooney"));
-	}
 
 	@Test
 	public void testSumValueOfTeams() {
@@ -130,6 +122,15 @@ public class Ex3_LambdaWithStreamsTest {
 		assertThat(result.get(3), is(wayneRooney));
 		assertThat(result.get(4), is(danielAlves));
 	}
+
+    @Test
+    public void testNameOfPlayerClosestToAverage() {
+        List<Player> players = asList(wayneRooney, juanMatta, olivierGiroud, davidVilla);
+
+        String nameOfPlayerClosestToAverage = Ex3_LambdaWithStreams.nameOfPlayerClosestToAverage(players);
+
+        assertThat(nameOfPlayerClosestToAverage, is("Wayne Rooney"));
+    }
 
 	@Test
 	public void testYoungestPlayerOnEachTeamMappedByTeamName() {

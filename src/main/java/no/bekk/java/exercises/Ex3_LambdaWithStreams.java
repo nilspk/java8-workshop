@@ -35,11 +35,6 @@ public class Ex3_LambdaWithStreams {
 		return players.stream().mapToInt(Player::getAge).average().getAsDouble();
 	}
 
-	static String nameOfPlayerClosestToAverage(List<Player> players) {
-		Double average = averageAgeOfPlayers(players);
-		return players.stream().min(comparing(player -> Math.abs(player.getAge() - average))).get().getName();
-	}
-
 	static Double sumValueOfAllTeams(List<Team> teams) {
 		return teams.stream().collect(summingDouble(Team::getValue));
 	}
@@ -77,6 +72,11 @@ public class Ex3_LambdaWithStreams {
 						.reversed()
 						.thenComparing(Player::getName)).collect(toList());
 	}
+
+    static String nameOfPlayerClosestToAverage(List<Player> players) {
+        Double average = averageAgeOfPlayers(players);
+        return players.stream().min(comparing(player -> Math.abs(player.getAge() - average))).get().getName();
+    }
 
 	static Map<String, Player> youngestPlayerOnEachTeamMappedByTeamName(final List<Team> teams) {
         return teams.stream()
