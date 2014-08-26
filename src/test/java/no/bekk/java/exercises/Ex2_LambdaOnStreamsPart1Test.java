@@ -17,11 +17,11 @@ import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
-public class Ex2_LambdaOnListsTest {
+public class Ex2_LambdaOnStreamsPart1Test {
 
 	@Test
 	public void testRemoveOldPlayers() {
-		List<Player> result = Ex2_LambdaOnLists.removeOldPlayers(LocalDate.of(1984, 1, 1), bayernMunchen.players);
+		List<Player> result = Ex2_LambdaOnStreamsPart1.removeOldPlayers(LocalDate.of(1984, 1, 1), bayernMunchen.players);
 		result.forEach(System.out::println);
 		assertThat(result, hasItems(arjenRobben));
 		assertThat(result, not(hasItems(philippLahm, franckRibery)));
@@ -31,7 +31,7 @@ public class Ex2_LambdaOnListsTest {
 	public void testAddValueToEachTeam() {
 		List<Team> teams = asList(manchesterUnited, liverpool, arsenal);
 
-		List<Team> teamsWithFivePercentValueIncrease = Ex2_LambdaOnLists.addValueToEachTeam(0.05, teams);
+		List<Team> teamsWithFivePercentValueIncrease = Ex2_LambdaOnStreamsPart1.addValueToEachTeam(0.05, teams);
 
 		assertThat(round(teamsWithFivePercentValueIncrease.get(0).value), is(round(2_950_500_000.0)));
 		assertThat(round(teamsWithFivePercentValueIncrease.get(1).value), is(round(725_550_000.0)));
@@ -40,7 +40,7 @@ public class Ex2_LambdaOnListsTest {
 
 	@Test
 	public void testSetLeagueNamesToUpperCase() {
-		List<League> result = Ex2_LambdaOnLists.setLeagueNamesToUpperCase(leagues);
+		List<League> result = Ex2_LambdaOnStreamsPart1.setLeagueNamesToUpperCase(leagues);
 
 		assertThat(result.get(0).name, is("PREMIER LEAGUE"));
 		assertThat(result.get(1).name, is("LA LIGA"));
@@ -51,7 +51,7 @@ public class Ex2_LambdaOnListsTest {
 	public void testRemoveTeamsWithLowValue() {
 		List<Team> teams = new ArrayList<>(asList(manchesterUnited, liverpool, arsenal, borussiaDortmund, atleticoMadrid));
 
-		Ex2_LambdaOnLists.removeTeamsWithLowValue(teams, 1_330_000_000.0);
+		Ex2_LambdaOnStreamsPart1.removeTeamsWithLowValue(teams, 1_330_000_000.0);
 
 		assertThat(teams, hasItems(manchesterUnited, arsenal));
 		assertThat(teams, not(hasItems(liverpool, borussiaDortmund, atleticoMadrid)));

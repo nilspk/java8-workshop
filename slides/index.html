@@ -46,7 +46,7 @@ URL: https://code.google.com/p/io-2012-slides
 	</hgroup>
 	<article>
 		<ul>
-			<li>Java Timeline</li>
+			<li>New in Java 8</li>
 			<li>λ - Lambda</li>
 			<li>Lambda Examples</li>
 			<li>Functional Interfaces</li>
@@ -61,7 +61,7 @@ URL: https://code.google.com/p/io-2012-slides
 
 <slide>
 	<hgroup>
-		<h2>Java Timeline</h2>
+		<h2>New in Java 8</h2>
 	</hgroup>
 	<article>
 	</article>
@@ -201,29 +201,15 @@ interface Rectangle {
 			<li>Multiple inheritence of behaviour</li>
 		</ul>
             <pre class="prettyprint" data-lang="Java 8">
-public interface Iterable&lt;E&gt; {
+public interface Collection&lt;E&gt; extends Iterable&lt;E&gt; {
 
     ...
 
-    <b>default</b> void forEach(Consumer<? super T> action) {
-        Objects.requireNonNull(action);
-        for (T t : this) {
-            action.accept(t);
-        }
-    }
+    <b>default</b> Stream<E> stream() {
+		return StreamSupport.stream(spliterator(), false);
+	}
 }
             </pre>
-	</article>
-</slide>
-
-<slide>
-	<hgroup>
-		<h2>Exercises</h2>
-	</hgroup>
-	<article>
-		<ul>
-			<li>Ex2_LambdaOnLists</li>
-		</ul>
 	</article>
 </slide>
 
@@ -244,6 +230,28 @@ myCollection.stream().filter(...).map(...).forEach(...);
 
 myCollection.parallelStream().filter(...).map(...).forEach(...);
 </pre>
+	</article>
+</slide>
+
+<slide>
+	<hgroup>
+		<h2>Lambda on Streams Examples</h2>
+	</hgroup>
+	<article>
+		<pre class="prettyprint" data-lang="Java 8">
+
+		</pre>
+	</article>
+</slide>
+
+<slide>
+	<hgroup>
+		<h2>Exercises</h2>
+	</hgroup>
+	<article>
+		<ul>
+			<li>Ex2_LambdaOnStreamsPart1</li>
+		</ul>
 	</article>
 </slide>
 
@@ -453,8 +461,8 @@ public static List&lt;String&gt; brandsSortedByPrice(List&lt;Car&gt; cars) {
 	</hgroup>
 	<article>
 		<ul>
-			<li>Ex3_LambdaWithStreams</li>
-			<li>Ex4_LambdaWithParallelStreams</li>
+			<li>Ex3_LambdaOnStreamsPart2</li>
+			<li>Ex4_LambdaOnParallelStreams</li>
 		</ul>
 		<p>
 			Hint: Check out new methods in java.util.Comparator and the new java.util.streams.Collectors

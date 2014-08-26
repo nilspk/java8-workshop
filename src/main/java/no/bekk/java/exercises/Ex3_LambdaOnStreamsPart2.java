@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.summingDouble;
 import static java.util.stream.Collectors.toList;
 import static no.bekk.java.exercises.Ex1_Lambda.youngestPlayer;
 
-public class Ex3_LambdaWithStreams {
+public class Ex3_LambdaOnStreamsPart2 {
 
 	static List<String> teamNames(List<Team> teams) {
 		return teams.stream().map(Team::getName).collect(toList());

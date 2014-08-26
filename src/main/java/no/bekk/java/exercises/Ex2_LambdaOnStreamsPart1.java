@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ex2_LambdaOnLists {
+public class Ex2_LambdaOnStreamsPart1 {
 
 	static List<Player> removeOldPlayers(LocalDate maxAge, List<Player> players) {
 		List<Player> result = new ArrayList<>(players.size());
