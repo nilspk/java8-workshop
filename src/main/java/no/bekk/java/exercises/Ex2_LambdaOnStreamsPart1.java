@@ -5,32 +5,29 @@ import no.bekk.java.model.Player;
 import no.bekk.java.model.Team;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 public class Ex2_LambdaOnStreamsPart1 {
 
+	static List<String> teamNames(List<Team> teams) {
+		return teams.stream().map(Team::getName).collect(toList());
+	}
+
 	static List<Player> removeOldPlayers(LocalDate maxAge, List<Player> players) {
-		List<Player> result = new ArrayList<>(players.size());
-		players.forEach(player -> {
-			if(player.birthDate.compareTo(maxAge) > 0) result.add(player);
-		});
-		return result;
+		return players.stream().filter(player -> player.birthDate.isAfter(maxAge)).collect(toList());
 	}
 
 	static List<Team> addValueToEachTeam(Double percent, List<Team> teams) {
-		List<Team> result = new ArrayList<>(teams.size());
-		teams.forEach(team -> result.add(new Team(team.name, team.value * (percent + 1), team.players)));
-		return result;
+		return teams.stream().map(team -> new Team(team.name, team.value * (percent + 1), team.players)).collect(toList());
+	}
+
+	static List<Team> removeTeamsWithLowValue(List<Team> teams, Double minValue) {
+		return teams.stream().filter(team -> team.value >= minValue).collect(toList());
 	}
 
 	static List<League> setLeagueNamesToUpperCase(List<League> leagues) {
-		List<League> result = new ArrayList<>(leagues.size());
-		leagues.forEach(league -> result.add(new League(league.name.toUpperCase(), league.teams)));
-		return result;
-	}
-
-	static void removeTeamsWithLowValue(List<Team> teams, Double minValue) {
-		teams.removeIf(team -> team.value < minValue);
+		return leagues.stream().map(league -> new League(league.name.toUpperCase(), league.teams)).collect(toList());
 	}
 }

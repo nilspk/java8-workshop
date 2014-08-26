@@ -20,6 +20,15 @@ import static org.junit.Assert.assertThat;
 public class Ex2_LambdaOnStreamsPart1Test {
 
 	@Test
+	public void testTeamNames() {
+		List<Team> teams = asList(manchesterUnited, liverpool, arsenal);
+
+		List<String> teamNames = Ex2_LambdaOnStreamsPart1.teamNames(teams);
+
+		assertThat(teamNames, hasItems("Manchester United", "Liverpool", "Arsenal"));
+	}
+
+	@Test
 	public void testRemoveOldPlayers() {
 		List<Player> result = Ex2_LambdaOnStreamsPart1.removeOldPlayers(LocalDate.of(1984, 1, 1), bayernMunchen.players);
 		result.forEach(System.out::println);
@@ -39,22 +48,22 @@ public class Ex2_LambdaOnStreamsPart1Test {
 	}
 
 	@Test
+	public void testRemoveTeamsWithLowValue() {
+		List<Team> teams = new ArrayList<>(asList(manchesterUnited, liverpool, arsenal, borussiaDortmund, atleticoMadrid));
+
+		List<Team> result = Ex2_LambdaOnStreamsPart1.removeTeamsWithLowValue(teams, 1_330_000_000.0);
+
+		assertThat(result, hasItems(manchesterUnited, arsenal));
+		assertThat(result, not(hasItems(liverpool, borussiaDortmund, atleticoMadrid)));
+	}
+
+	@Test
 	public void testSetLeagueNamesToUpperCase() {
 		List<League> result = Ex2_LambdaOnStreamsPart1.setLeagueNamesToUpperCase(leagues);
 
 		assertThat(result.get(0).name, is("PREMIER LEAGUE"));
 		assertThat(result.get(1).name, is("LA LIGA"));
 		assertThat(result.get(2).name, is("BUNDESLIGA"));
-	}
-
-	@Test
-	public void testRemoveTeamsWithLowValue() {
-		List<Team> teams = new ArrayList<>(asList(manchesterUnited, liverpool, arsenal, borussiaDortmund, atleticoMadrid));
-
-		Ex2_LambdaOnStreamsPart1.removeTeamsWithLowValue(teams, 1_330_000_000.0);
-
-		assertThat(teams, hasItems(manchesterUnited, arsenal));
-		assertThat(teams, not(hasItems(liverpool, borussiaDortmund, atleticoMadrid)));
 	}
 
 	private BigDecimal round(Double d) {

@@ -19,10 +19,6 @@ import static no.bekk.java.exercises.Ex1_Lambda.youngestPlayer;
 
 public class Ex3_LambdaOnStreamsPart2 {
 
-	static List<String> teamNames(List<Team> teams) {
-		return teams.stream().map(Team::getName).collect(toList());
-	}
-
 	static Integer ageOfOldestPlayer(List<Player> players) {
 		return players.stream().mapToInt(Player::getAge).max().getAsInt();
 	}

@@ -17,15 +17,6 @@ import static org.junit.Assert.assertThat;
 public class Ex3_LambdaOnStreamsPart2Test {
 
 	@Test
-	public void testTeamNames() {
-		List<Team> teams = asList(manchesterUnited, liverpool, arsenal);
-
-		List<String> teamNames = Ex3_LambdaOnStreamsPart2.teamNames(teams);
-
-		assertThat(teamNames, hasItems("Manchester United", "Liverpool", "Arsenal"));
-	}
-
-	@Test
 	public void testAgeOfOldestPlayer() {
 		List<Player> players = asList(wayneRooney, juanMatta, mesutOzil, olivierGiroud);
 
