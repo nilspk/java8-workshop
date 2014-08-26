@@ -235,11 +235,87 @@ myCollection.parallelStream().filter(...).map(...).forEach(...);
 
 <slide>
 	<hgroup>
-		<h2>Lambda on Streams Examples</h2>
+		<h2>Lambda on Streams Examples - filter</h2>
 	</hgroup>
-	<article>
+	<article class="smaller">
+		<ul>
+			<li>Stream&lt;T&gt; filter(Predicate&lt;? super T&gt; predicate);</li>
+		</ul>
+		<pre class="prettyprint" data-lang="Java 7">
+public static List&lt;Car&gt; getExpensiveCars(List&lt;Car&gt; cars) {
+    List&lt;Car&gt; expensiveCars = new ArrayList&lt;&gt;();
+    for (Car car : cars) {
+        if (car.price &gt; 1_000_000) {
+            expensiveCars.add(car);
+        }
+    }
+    return expensiveCars;
+}
+		</pre>
 		<pre class="prettyprint" data-lang="Java 8">
+public static List&lt;String&gt; getExpensiveCars(List&lt;Car&gt; cars) {
+    return cars.stream()
+                   .filter(c -&gt; c.price &gt; 1_000_000)
+                   .collect(toList());
+}
+		</pre>
+	</article>
+</slide>
 
+<slide>
+	<hgroup>
+		<h2>Lambda on Streams Examples - map</h2>
+	</hgroup>
+	<article class="smaller">
+		<ul>
+			<li>&lt;R&gt; Stream&lt;R&gt; map(Function&lt;? super T, ? extends R&gt; mapper);</li>
+		</ul>
+		<pre class="prettyprint" data-lang="Java 7">
+public static List&lt;String&gt; getBrands(List&lt;Car&gt; cars) {
+    List&lt;String&gt; brands = new ArrayList&lt;&gt;();
+    for (Car car : cars) {
+        brands.add(car.getBrand());
+    }
+    return brands;
+}
+		</pre>
+		<pre class="prettyprint" data-lang="Java 8">
+public static List&lt;String&gt; getBrands(List&lt;Car&gt; cars) {
+    return cars.stream()
+                   .map(Car::getBrand)
+                   .collect(toList());
+}
+		</pre>
+	</article>
+</slide>
+
+<slide>
+	<hgroup>
+		<h2>Lambda on Streams Examples - filter and map</h2>
+	</hgroup>
+	<article class="smaller">
+		<ul>
+			<li>Stream&lt;T&gt; filter(Predicate&lt;? super T&gt; predicate);</li>
+			<li>&lt;R&gt; Stream&lt;R&gt; map(Function&lt;? super T, ? extends R&gt; mapper);</li>
+		</ul>
+		<pre class="prettyprint" data-lang="Java 7">
+public static List&lt;String&gt; getBrandOfExpensiveCars(List&lt;Car&gt; cars) {
+    List&lt;String&gt; expensiveCarBrands = new ArrayList&lt;&gt;();
+    for (Car car : cars) {
+        if (car.price &gt; 1_000_000) {
+            expensiveCarBrands.add(car.brand);
+        }
+    }
+    return expensiveCarBrands;
+}
+		</pre>
+		<pre class="prettyprint" data-lang="Java 8">
+public static List&lt;String&gt; getBrandOfExpensiveCars(List&lt;Car&gt; cars) {
+    return cars.stream()
+                   .filter(c -&gt; c.price &gt; 1_000_000)
+                   .map(Car::getBrand)
+                   .collect(toList());
+}
 		</pre>
 	</article>
 </slide>
