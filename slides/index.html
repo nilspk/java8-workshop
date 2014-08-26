@@ -256,7 +256,7 @@ public static List&lt;Car&gt; getExpensiveCars(List&lt;Car&gt; cars) {
 public static List&lt;String&gt; getExpensiveCars(List&lt;Car&gt; cars) {
     return cars.stream()
                    .filter(c -&gt; c.price &gt; 1_000_000)
-                   .collect(toList());
+                   .collect(Collectors.toList());
 }
 		</pre>
 	</article>
@@ -283,7 +283,7 @@ public static List&lt;String&gt; getBrands(List&lt;Car&gt; cars) {
 public static List&lt;String&gt; getBrands(List&lt;Car&gt; cars) {
     return cars.stream()
                    .map(Car::getBrand)
-                   .collect(toList());
+                   .collect(Collectors.toList());
 }
 		</pre>
 	</article>
@@ -314,7 +314,7 @@ public static List&lt;String&gt; getBrandOfExpensiveCars(List&lt;Car&gt; cars) {
     return cars.stream()
                    .filter(c -&gt; c.price &gt; 1_000_000)
                    .map(Car::getBrand)
-                   .collect(toList());
+                   .collect(Collectors.toList());
 }
 		</pre>
 	</article>

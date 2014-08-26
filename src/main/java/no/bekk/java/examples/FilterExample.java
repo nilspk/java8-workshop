@@ -4,8 +4,8 @@ import no.bekk.java.model.Car;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
 
 public class FilterExample {
 
@@ -28,7 +28,7 @@ public class FilterExample {
         public static List<Car> getExpensiveCars(List<Car> cars) {
             return cars.stream()
                     .filter(c -> c.price > 1_000_000)
-                    .collect(toList());
+                    .collect(Collectors.toList());
         }
     }
 

@@ -4,8 +4,7 @@ import no.bekk.java.model.Car;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
+import java.util.stream.Collectors;
 
 public class MapExample {
 
@@ -26,7 +25,7 @@ public class MapExample {
         public static List<String> getBrands(List<Car> cars) {
             return cars.stream()
                     .map(Car::getBrand)
-                    .collect(toList());
+                    .collect(Collectors.toList());
         }
     }
 

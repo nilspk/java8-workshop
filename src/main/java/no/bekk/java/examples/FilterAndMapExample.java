@@ -4,8 +4,7 @@ import no.bekk.java.model.Car;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
+import java.util.stream.Collectors;
 
 public class FilterAndMapExample {
 
@@ -29,7 +28,7 @@ public class FilterAndMapExample {
             return cars.stream()
                     .filter(c -> c.price > 1_000_000)
                     .map(Car::getBrand)
-                    .collect(toList());
+                    .collect(Collectors.toList());
         }
     }
 
