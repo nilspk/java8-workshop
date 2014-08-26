@@ -1,6 +1,5 @@
 package no.bekk.java.examples;
 
-import no.bekk.java.model.Car;
 import no.bekk.java.model.Player;
 import no.bekk.java.model.Team;
 
@@ -8,9 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
-
-public class FlatmapExample {
+public class FlatMapExample {
 
     static class Java7 {
 

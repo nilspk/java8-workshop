@@ -40,12 +40,7 @@ public class CarExamples {
     }
 
     public static void main(String[] args) {
-        System.out.println(parse("public static List<String> brandsSortedByPrice(List<Car> cars) {\n" +
-                "            return cars.stream()\n" +
-                "                    .sorted(Comparator.comparing(Car::getPrice))\n" +
-                "                    .map(Car::getBrand)\n" +
-                "                    .collect(toList());\n" +
-                "        }"));
+        System.out.println(parse("Stream<T> sorted(Comparator<? super T> comparator);"));
     }
 
 }
