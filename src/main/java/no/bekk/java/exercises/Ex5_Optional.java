@@ -6,14 +6,13 @@ import no.bekk.java.model.Team;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import static java.util.Comparator.comparing;
+
 public class Ex5_Optional {
 
     static Optional<Player> youngestPlayerOlderThan(Team team, LocalDate minDate) {
         return team.getPlayers().stream()
                 .filter(player -> player.birthDate.isBefore(minDate))
-                .reduce((x, y) -> {
-                    if (x.birthDate.isAfter(y.birthDate)) return x;
-                    else return y;
-                });
+                .max(comparing(Player::getBirthDate));
     }
 }
