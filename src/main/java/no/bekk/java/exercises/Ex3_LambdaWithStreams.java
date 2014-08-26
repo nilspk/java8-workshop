@@ -5,12 +5,17 @@ import no.bekk.java.model.Player;
 import no.bekk.java.model.Team;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
+import static java.util.AbstractMap.SimpleEntry;
 import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.summingDouble;
+import static java.util.stream.Collectors.toList;
+import static no.bekk.java.exercises.Ex1_Lambda.youngestPlayer;
 
 public class Ex3_LambdaWithStreams {
 
@@ -74,9 +79,17 @@ public class Ex3_LambdaWithStreams {
 	}
 
 	static Map<String, Player> youngestPlayerOnEachTeamMappedByTeamName(final List<Team> teams) {
-		return teams.stream()
-				.map(team -> new Team(team.name, team.value, Arrays.asList(team.players.stream()
-						.reduce(Ex1_Lambda.youngestPlayer).get())))
-				.collect(toMap(Team::getName, team -> team.getPlayers().get(0)));
+        return teams.stream()
+                .map(team -> new SimpleEntry<>(team.getName(), getYoungestPlayer(team)))
+                .collect(toMap());
 	}
+
+    private static Player getYoungestPlayer(Team team) {
+        return team.getPlayers().stream().reduce(youngestPlayer).get();
+    }
+
+    private static <K, V> Collector<Map.Entry<K, V>, ?, Map<K, V>> toMap() {
+        return Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue);
+    }
+
 }
