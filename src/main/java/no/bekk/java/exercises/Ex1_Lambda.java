@@ -8,28 +8,21 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import static no.bekk.java.util.Utils.implementThis;
+
 public class Ex1_Lambda {
 
-    public static Function<Player, String> playerName = Player::getName;
+	public static Function<Player, String> playerName = implementThis();
 
-    public static Function<Player, Integer> playerAge = Player::getAge;
+	public static Function<Player, Integer> playerAge = implementThis();
 
-    public static Predicate<Player> isOlderThan(Integer age) {
-        return p -> p.getAge() > age;
-    }
+	public static Predicate<Player> isOlderThan(Integer age) {
+		return implementThis();
+	}
 
-    static BinaryOperator<Player> youngestPlayer = (x, y) -> {
-        if (x.birthDate.isAfter(y.birthDate)) return x;
-        else return y;
-    };
+	static BinaryOperator<Player> youngestPlayer = implementThis();
 
-    static BinaryOperator<Team> highestTeamValue = (x, y) -> {
-        if (x.value > y.value) return x;
-        else return y;
-    };
+	static BinaryOperator<Team> highestTeamValue = implementThis();
 
-	static BinaryOperator<League> longestLeagueName = (x, y) -> {
-		if (x.getName().length() > y.getName().length()) return x;
-		else return y;
-	};
+	static BinaryOperator<League> longestLeagueName = implementThis();
 }

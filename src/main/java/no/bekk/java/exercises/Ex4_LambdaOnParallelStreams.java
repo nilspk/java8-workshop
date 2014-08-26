@@ -5,12 +5,12 @@ import no.bekk.java.model.Team;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static java.util.stream.Collectors.toList;
+import static no.bekk.java.util.Utils.implementThis;
 
 public class Ex4_LambdaOnParallelStreams {
 
 	static List<Team> teamsWithValueHigherThan(Double value, List<Team> teams) {
-		return teams.parallelStream().filter(slowPredicate(team -> team.value > value)).collect(toList());
+		return implementThis();
 	}
 
 	private static <T> Predicate<T> slowPredicate(Predicate<T> predicate) {
