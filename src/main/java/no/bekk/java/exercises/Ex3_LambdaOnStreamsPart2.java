@@ -44,7 +44,7 @@ public class Ex3_LambdaOnStreamsPart2 {
 	}
 
 	static Map<Integer, List<Player>> groupPlayersByBirthYear(List<Player> players) {
-		return players.stream().collect(groupingBy(player -> player.getBirthDate().getYear(), toList()));
+		return players.stream().collect(groupingBy(player -> player.getBirthDate().getYear()));
 	}
 
 	static List<Double> sumValuesOfEachLeague(final List<League> leagues) {
