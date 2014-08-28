@@ -32,7 +32,7 @@ public class StreamOperationExamples {
 	String[] array2 = strings.toArray(i -> new String[i]);
 	String concatenated = strings.reduce("", String::concat);
 	Optional<String> concatenatedOpt = strings.reduce(String::concat);
-	int sumLength = strings.reduce(0, (x, y) -> x + y.length(), Integer::sum);
+	int sumLength = strings.mapToInt(String::length).sum();
 	List<String> list = strings.collect(Collectors.toList());
 	ArrayList<String> arrayList = strings.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
 	Optional<String> min = strings.min(Comparator.comparing(x -> x));
